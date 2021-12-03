@@ -2,14 +2,15 @@ import os
 import django_heroku
 from pathlib import Path
 from datetime import timedelta
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-r7us0einpoy*b_o5xs6^5q5p)tfvmcw)_(-jh6=opn^)=h4jqz'
+SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = False
+DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['https://sga-sistema.herokuapp.com']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS')
 
 BASE_APPS = [
     'django.contrib.admin',
@@ -37,9 +38,11 @@ THIRD_APPS = [
     'drf_yasg',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
+    'django_filters',
 ]
 
 INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS
+
 SWAGGER_SETTINGS = {
     'DOC_EXPANSION': 'none'
 }
@@ -47,7 +50,8 @@ SWAGGER_SETTINGS = {
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 MIDDLEWARE = [
@@ -92,10 +96,10 @@ WSGI_APPLICATION = 'apialumnos.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dcpmo23qa10jgk',
-        'USER': 'xumigpxqegqbim',
-        'PASSWORD': '61a566c68c28d8a35df1270dd87f028ae7f33efc2a659297f618b99cf867edba',
-        'HOST': 'ec2-54-147-203-50.compute-1.amazonaws.com',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
         'PORT': '5432',
     }
 }
@@ -119,15 +123,9 @@ AUTH_USER_MODEL = 'users.Usuario'
 
 CORS_ORIGIN_ALLOW_ALL = False
 
-CORS_ALLOWED_ORIGINS = [
-    "https://www.laplatagestion.com.ar",
-    "http://www.laplatagestion.com.ar"
-]
+CORS_ALLOWED_ORIGINS = config('CORS')
 
-CORS_ORIGIN_WHITELIST = [
-    "https://www.laplatagestion.com.ar",
-    "http://www.laplatagestion.com.ar"
-]
+CORS_ORIGIN_WHITELIST = config('CORS')
 
 LANGUAGE_CODE = 'es-ar'
 

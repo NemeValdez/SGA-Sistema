@@ -1,3 +1,5 @@
 from django.contrib import admin
+from app.estudiantes.models import Estudiantes, EstudiantesEstablecimientos
 
-# Register your models here.
+admin.site.register(Estudiantes)
+admin.site.register(EstudiantesEstablecimientos)
