@@ -1,3 +1,1 @@
-release: python apialumnos/manage.py makemigrations --no-input
-release: python apialumnos/manage.py migrate --no-input
-web: gunicorn apialumnos.apialumnos.wsgi
+web: gunicorn apialumnos.apialumnos.wsgi:application --log-file - --log-level debug
