@@ -34,3 +34,6 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.dni_usuario
+
+    def natural_key(self):
+        return (self.dni_usuario)

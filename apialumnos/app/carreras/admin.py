@@ -1,6 +1,50 @@
 from django.contrib import admin
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 from app.carreras.models import TurnosCarreras, Carreras, LimitacionesCarreras
 
-admin.site.register(TurnosCarreras)
-admin.site.register(Carreras)
-admin.site.register(LimitacionesCarreras)
+
+class TurnosCarrerasAdmin(admin.ModelAdmin):
+    icon_name = 'query_builder'
+    list_display = (
+        'id',
+        'turno_carrera',
+        'turno_carrera_completo'
+    )
+    ordering = ('id',)
+
+
+class CarrerasResources(resources.ModelResource):
+    class Meta:
+        model = Carreras
+
+
+class CarrerasAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    icon_name = 'leaderboard'
+    search_fields = ['resolucion_carrera', 'nombre_carrera']
+    list_display = (
+        'id',
+        'nombre_carrera',
+        'resolucion_carrera',
+        'relacion_turno_carrera'
+    )
+    resource_class = CarrerasResources
+    ordering = ('id',)
+
+
+class LimitacionesCarrerasAdmin(admin.ModelAdmin):
+    icon_name = 'settings'
+    list_display = (
+        'id',
+        'cantidad_aceptada',
+        'cantidad_lista_espera',
+        'fecha_inicio',
+        'fecha_fin'
+    )
+    ordering = ('id',)
+
+
+'''Registro de los modelos de Carreras'''
+admin.site.register(TurnosCarreras, TurnosCarrerasAdmin)
+admin.site.register(Carreras, CarrerasAdmin)
+admin.site.register(LimitacionesCarreras, LimitacionesCarrerasAdmin)

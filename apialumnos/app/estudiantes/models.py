@@ -4,11 +4,11 @@ from django.db import models
 class EstudiantesEstablecimientos(models.Model):
     '''Modelo de relación con la escuela de procedencia del estudiante'''
     nombre_escuela = models.CharField(
-        max_length=100, null=False, blank=False)
+        max_length=100, null=False, blank=False, verbose_name='Nombre del secundario del preinscripto')
     titulo = models.CharField(
-        max_length=100, null=False, blank=False)
+        max_length=100, null=False, blank=False, verbose_name='Título que otorga el secundario')
     estado_secundario = models.CharField(
-        max_length=1, null=False, blank=False)
+        max_length=1, null=False, blank=False, verbose_name='Estado de la finalización del secundario')
     '''Los campos originales del formulario A1 - preinscripción se van a cargar como nuevos cuando se decida cargar'''
 
     @property
@@ -28,26 +28,25 @@ class EstudiantesEstablecimientos(models.Model):
 
 
 class Estudiantes(models.Model):
+    '''Datos completos del estudiante'''
     apellido_estudiante = models.CharField(
-        max_length=100, null=False, blank=False)
+        max_length=100, null=False, blank=False, verbose_name='Apellido del estudiante')
     nombre_estudiante = models.CharField(
-        max_length=100, null=False, blank=False)
+        max_length=100, null=False, blank=False, verbose_name='Nombre del estudiante')
     dni_estudiante = models.CharField(
-        max_length=8, null=False, blank=False)
+        max_length=8, null=False, blank=False, verbose_name='DNI del estudiante')
     sexo_estudiante = models.CharField(
-        max_length=1, null=False, blank=False)
+        max_length=1, null=False, blank=False, verbose_name='Sexo del estudiante')
     provincia_estudiante = models.CharField(
-        max_length=100, null=False, blank=False)
+        max_length=100, null=False, blank=False, verbose_name='Provincia de residencia del estudiante')
     telefono_estudiante = models.CharField(
-        max_length=50, null=False, blank=False)
+        max_length=50, null=False, blank=False, verbose_name='Teléfono del estudiante')
     mail_estudiante = models.EmailField(
-        null=False, blank=False)
+        null=False, blank=False, verbose_name='Mail del estudiante')
     legajo_estudiante = models.CharField(
-        max_length=12, null=False, blank=False)
+        max_length=12, null=False, blank=False, verbose_name='Número de legajo del estudiante')
     secundario_estudiante = models.ForeignKey(
-        EstudiantesEstablecimientosPreinscripciones, on_delete=models.CASCADE, related_name="escuela")
-    estado_estudiante = models.CharField(
-        max_length=20, null=False, blank=False)
+        EstudiantesEstablecimientos, on_delete=models.CASCADE, related_name="secundariasEstudiantes")
 
     @property
     def _history_user(self):

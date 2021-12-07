@@ -2,18 +2,18 @@ import os
 import django_heroku
 from pathlib import Path
 from datetime import timedelta
-from decouple import config
+from decouple import config, Csv
+from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = config('DEBUG')
+DEBUG = config('DEBUG', cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS')
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 BASE_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -25,7 +25,6 @@ LOCAL_APPS = [
     'app.carreras',
     'app.estudiantes',
     'app.inscripciones',
-    'app.login',
     'app.institutos',
     'app.users',
 ]
@@ -33,12 +32,16 @@ LOCAL_APPS = [
 THIRD_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
-    'simple_history',
     'corsheaders',
     'drf_yasg',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'django_filters',
+    'import_export',
+    'material',
+    'material.admin',
+    'admin_honeypot',
+    'simple_history',
 ]
 
 INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS
@@ -46,6 +49,8 @@ INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS
 SWAGGER_SETTINGS = {
     'DOC_EXPANSION': 'none'
 }
+
+ADMIN_HONEYPOT_EMAIL_ADMINS = True
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -68,7 +73,7 @@ MIDDLEWARE = [
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
 }
@@ -90,6 +95,16 @@ TEMPLATES = [
         },
     },
 ]
+MATERIAL_ADMIN_SITE = {
+    'HEADER':  _('SGA - Preinscripción'),
+    'TITLE':  _('SGA - Preinscripción'),
+    'MAIN_BG_COLOR':  '#004d40',
+    'MAIN_HOVER_COLOR':  '#78909c',
+    'SHOW_THEMES':  True,
+    'TRAY_REVERSE': True,
+    'NAVBAR_REVERSE': True,
+    'SHOW_COUNTS': True,
+}
 
 WSGI_APPLICATION = 'apialumnos.wsgi.application'
 
@@ -123,9 +138,11 @@ AUTH_USER_MODEL = 'users.Usuario'
 
 CORS_ORIGIN_ALLOW_ALL = False
 
-CORS_ALLOWED_ORIGINS = config('CORS')
+CORS_ALLOWED_ORIGINS = ["https://www.laplatagestion.com.ar",
+                        "http://www.laplatagestion.com.ar"]
 
-CORS_ORIGIN_WHITELIST = config('CORS')
+CORS_ORIGIN_WHITELIST = ["https://www.laplatagestion.com.ar",
+                         "http://www.laplatagestion.com.ar"]
 
 LANGUAGE_CODE = 'es-ar'
 
