@@ -1,10 +1,11 @@
-from django.contrib import admin
+from django.contrib.admin import ModelAdmin, register
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from app.carreras.models import TurnosCarreras, Carreras, LimitacionesCarreras
 
 
-class TurnosCarrerasAdmin(admin.ModelAdmin):
+@register(TurnosCarreras)
+class TurnosCarrerasAdmin(ModelAdmin):
     icon_name = 'query_builder'
     list_display = (
         'id',
@@ -19,7 +20,8 @@ class CarrerasResources(resources.ModelResource):
         model = Carreras
 
 
-class CarrerasAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+@register(Carreras)
+class CarrerasAdmin(ImportExportModelAdmin, ModelAdmin):
     icon_name = 'leaderboard'
     search_fields = ['resolucion_carrera', 'nombre_carrera']
     list_display = (
@@ -32,7 +34,8 @@ class CarrerasAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     ordering = ('id',)
 
 
-class LimitacionesCarrerasAdmin(admin.ModelAdmin):
+@register(LimitacionesCarreras)
+class LimitacionesCarrerasAdmin(ModelAdmin):
     icon_name = 'settings'
     list_display = (
         'id',
