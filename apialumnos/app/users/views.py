@@ -20,7 +20,7 @@ class UsuarioViewSet(viewsets.GenericViewSet):
             self.queryset = self.serializer_class().Meta.model.objects.filter(is_active=True)
         return self.queryset
 
-    @action(detail=True, methods=['post'], url_path='cambiar-contraseña/')
+    @action(detail=True, methods=['post'], url_path='cambiar-contraseña')
     def set_password(self, request, pk=None):
         usuario = self.get_object(pk)
         contraseña_serializer = ContraseñaSerializer(data=request.data)
