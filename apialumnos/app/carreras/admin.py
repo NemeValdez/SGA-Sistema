@@ -45,9 +45,3 @@ class LimitacionesCarrerasAdmin(ModelAdmin):
         'fecha_fin'
     )
     ordering = ('id',)
-
-
-'''Registro de los modelos de Carreras'''
-admin.site.register(TurnosCarreras, TurnosCarrerasAdmin)
-admin.site.register(Carreras, CarrerasAdmin)
-admin.site.register(LimitacionesCarreras, LimitacionesCarrerasAdmin)
