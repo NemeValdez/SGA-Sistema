@@ -1,1 +1,1 @@
-web: gunicorn --chdir /apialumnos apialumnos.wsgi --preload
+web: gunicorn --chdir apialumnos apialumnos.wsgi --preload
