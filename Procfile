@@ -1,3 +1,1 @@
-web: gunicorn apialumnos.wsgi:application --log-file - --log-level debug
-python manage.py collectstatic --noinput
-manage.py migrate
+web: gunicorn -b 0.0.0.0:8000 apialumnos.apialumnos:application --log-file -
