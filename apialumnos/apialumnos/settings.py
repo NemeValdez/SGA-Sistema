@@ -9,9 +9,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['https://sga-sistema.herokuapp.com']
+ALLOWED_HOSTS = ['sga-sistema.herokuapp.com']
 
 BASE_APPS = [
     'django.contrib.auth',
