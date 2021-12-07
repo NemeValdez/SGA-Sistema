@@ -1,1 +1,1 @@
-web: gunicorn apialumnos.apialumnos:wsgi.py --log-file -
+web: gunicorn apialumnos.apialumnos.wsgi --log-file -
