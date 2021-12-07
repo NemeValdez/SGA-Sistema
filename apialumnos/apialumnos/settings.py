@@ -11,7 +11,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['sga-sistema.herokuapp.com']
+ALLOWED_HOSTS = ['sga-sistema.herokuapp.com/']
 
 BASE_APPS = [
     'django.contrib.auth',

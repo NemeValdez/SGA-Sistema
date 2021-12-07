@@ -5,7 +5,7 @@ from app.estudiantes.models import Estudiantes, EstudiantesEstablecimientos
 
 
 class EstudiantesEstablecimientosAdmin(admin.ModelAdmin):
-    icon_name = 'local_library'
+    icon_name = 'location_city'
     list_display = (
         'id',
         'titulo',

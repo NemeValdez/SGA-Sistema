@@ -10,7 +10,7 @@ class UsuariosResources(resources.ModelResource):
 
 
 class UsuariosAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    icon_name = 'verified_user'
+    icon_name = 'supervisor_account'
     search_fields = ['dni_usuario']
     list_display = (
         'id',
