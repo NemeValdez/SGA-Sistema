@@ -1,1 +1,1 @@
-web: gunicorn apialumnos.apialumnos.wsgi:application --log-file - --log-level debug
+web: gunicorn apialumnos.apialumnos.wsgi --log-file -
