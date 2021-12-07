@@ -21,7 +21,7 @@ class CarrerasResources(resources.ModelResource):
 
 
 @register(Carreras)
-class CarrerasAdmin(ImportExportModelAdmin, ModelAdmin):
+class CarrerasAdmin(ModelAdmin, ImportExportModelAdmin):
     icon_name = 'leaderboard'
     search_fields = ['resolucion_carrera', 'nombre_carrera']
     list_display = (
