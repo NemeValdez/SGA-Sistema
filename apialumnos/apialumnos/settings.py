@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['sga-sistema.herokuapp.com/']
 
@@ -155,12 +155,12 @@ USE_TZ = True
 
 APPEND_SLASH = False
 
-STATIC_ROOT = os.path.join(BASE_DIR, '/static/')
+STATIC_ROOT = os.path.join(BASE_DIR, '/staticfiles/')
 
-STATIC_URL = '/static/'
+STATIC_URL = '/staticfiles/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, '/static/'),
+    os.path.join(BASE_DIR, '/staticfiles/'),
 )
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
