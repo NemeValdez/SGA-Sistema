@@ -1,1 +1,1 @@
-web: gunicorn apialumnos.apialumnos.wsgi --log-file -
+web: gunicorn apialumnos.apialumnos.wsgi --preload
