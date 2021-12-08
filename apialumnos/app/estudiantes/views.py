@@ -1,4 +1,4 @@
-from rest_framework import viewsets, generics
+from rest_framework import viewsets, filters
 from app.estudiantes.models import Estudiantes
 from app.estudiantes.serializers import EstudiantesSerializers, EstudiantesEstablecimientosSerializers
 
@@ -15,7 +15,8 @@ class EstudiantesViewSet(viewsets.ModelViewSet):
     queryset = EstudiantesSerializers.Meta.model.objects.all()
 
 
-class BuscarDNI(generics.ListAPIView):
+class BuscarDNIView(viewsets.ReadOnlyModelViewSet):
     queryset = Estudiantes.objects.all()
-    serializer_class = EstudiantesSerializers
-    filter_fields = ('dni_estudiante',)
+    serializer_class = EstudiantesSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['dni_estudiante']
