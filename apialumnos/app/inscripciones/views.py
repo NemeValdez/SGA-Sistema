@@ -1,5 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
+from app.inscripciones.filters import Inscripcion1Filter, Inscripcion2Filter
 from app.inscripciones.models import InstitutosCarreras, Inscripciones, EstudiantesPrimerCarrera, EstudiantesSegundaCarrera
 from app.inscripciones.serializers import InstitutosCarrerasSerializer, InscripcionesSerializer, EstudiantesPrimerCarreraSerializer, EstudiantesSegundaCarreraSerializer
 
@@ -27,3 +28,17 @@ class EstudianteSegundaCarreraViewSet(viewsets.ModelViewSet):
     '''Vista que gestiona el CRUD de la inscripción del estudiante a la segunda carrera'''
     serializer_class = EstudiantesSegundaCarreraSerializer
     queryset = EstudiantesSegundaCarreraSerializer.Meta.model.objects.all()
+
+
+class BuscarInscripcion1View(viewsets.ReadOnlyModelViewSet):
+    queryset = EstudiantesPrimerCarreraSerializer.Meta.model.objects.all()
+    serializer_class = EstudiantesPrimerCarreraSerializer
+    filter_class = Inscripcion1Filter
+    search_fields = ('=relacion_estudiante',)
+
+
+class BuscarInscripcion2View(viewsets.ReadOnlyModelViewSet):
+    queryset = EstudiantesPrimerCarreraSerializer.Meta.model.objects.all()
+    serializer_class = EstudiantesPrimerCarreraSerializer
+    filter_class = Inscripcion2Filter
+    search_fields = ('=relacion_estudiante',)
