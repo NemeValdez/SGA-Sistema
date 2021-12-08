@@ -17,6 +17,6 @@ class EstudiantesViewSet(viewsets.ModelViewSet):
 
 class BuscarDNIView(viewsets.ReadOnlyModelViewSet):
     queryset = Estudiantes.objects.all()
-    serializer_class = EstudiantesSerializer
+    serializer_class = EstudiantesSerializers
     filter_backends = [filters.SearchFilter]
     search_fields = ['dni_estudiante']
