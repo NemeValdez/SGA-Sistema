@@ -1,7 +1,7 @@
 from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
-from app.institutos.models import Institutos, SedesInstitutos, RolesJerarquicos, Jerarquicos
+from app.institutos.models import Institutos, SedesInstitutos, RolesJerarquicos, Jerarquicos, InstitutosJerarquicos
 
 
 class RolesJerarquicosAdmin(admin.ModelAdmin):
@@ -34,6 +34,18 @@ class InstitutosAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     ordering = ('id',)
 
 
+class InstitutosJerarquicosResources(resources.ModelResource):
+    class Meta:
+        model = InstitutosJerarquicos
+
+
+class InstitutosJerarquicosAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    icon_name = 'psychology'
+    list_display = ('id',)
+    resource_class = InstitutosJerarquicosResources
+
+
 '''Registro de los modelos de Estudiantes'''
 admin.site.register(RolesJerarquicos, RolesJerarquicosAdmin)
 admin.site.register(Institutos, InstitutosAdmin)
+admin.site.register(InstitutosJerarquicos, InstitutosJerarquicosAdmin)

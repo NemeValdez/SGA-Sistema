@@ -3,10 +3,10 @@ from app.carreras.views import TurnosCarrerasViewSet, CarrerasViewSet, Limitacio
 
 routers = DefaultRouter()
 routers.register(r'turno', TurnosCarrerasViewSet,
-                 basename='Turnos de las Carreras')
+                 basename='turnoCarreras')
 routers.register(r'carrera', CarrerasViewSet,
-                 basename='Datos de las Carreras')
+                 basename='carreras')
 routers.register(r'limites', LimitacionesCarrerasViewSet,
-                 basename='Limites que corresponden a determinada Carrera')
+                 basename='limitesCarreras')
 
 urlpatterns = routers.urls

@@ -6,7 +6,7 @@ class TurnosCarreras(models.Model):
     turno_carrera = models.CharField(
         max_length=1, null=False,  blank=False, verbose_name='Turno implicíto')
     turno_carrera_completo = models.CharField(
-        max_length=6, null=False, blank=False, verbose_name='Turno explicíto')
+        max_length=20, null=False, blank=False, verbose_name='Turno explicíto')
 
     @property
     def _history_user(self):

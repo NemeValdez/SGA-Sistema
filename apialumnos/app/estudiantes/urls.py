@@ -3,6 +3,6 @@ from app.estudiantes.views import EstudiantesViewSet, BuscarDNIView
 
 routers = DefaultRouter()
 routers.register(r'estudiante', EstudiantesViewSet,
-                 basename='Datos del estudiante')
-routers.register(r'buscar-dni', BuscarDNIView, basename='dni')
+                 basename='estudiante')
+routers.register(r'buscar-dni', BuscarDNIView, basename='buscarDNI')
 urlpatterns = routers.urls

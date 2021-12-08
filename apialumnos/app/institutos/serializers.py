@@ -49,7 +49,18 @@ class JerarquicosSerializers(serializers.ModelSerializer):
             'sexo_jerarquico': instance.sexo_jerarquico,
             'fecha_nacimiento_jerarquico': instance.fecha_nacimiento_jerarquico,
             'id_cargo': instance.relacion_rol_jerarquico.id if instance.relacion_rol_jerarquico.id is not None else '',
-            'cargo': instance.relacion_rol_jerarquico.nombre_rol if instance.relacion_rol_jerarquico.nombre_rol is not None else '',
-            'id_instituto': instance.relacion_instituto.id if instance.relacion_instituto.id is not None else '',
-            'instituto': instance.relacion_instituto.numero_instituto if instance.relacion_instituto.numero_instituto is not None else'',
+            'cargo': instance.relacion_rol_jerarquico.nombre_rol if instance.relacion_rol_jerarquico.nombre_rol is not None else ''
+        }
+
+
+class JerarquicosInstitutosSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = InstitutosJerarquicos
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        return{
+            'id': instance.id,
+            'id_relacion_jerarquico': instance.relacion_jerarquico.id if instance.relacion_jerarquico.id is not None else '',
+            'id_instituto': instance.relacion_instituto.id if instance.relacion_instituto.id is not None else ''
         }

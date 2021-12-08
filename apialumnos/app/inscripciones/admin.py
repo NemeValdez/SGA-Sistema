@@ -1,28 +1,13 @@
 from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
-from app.inscripciones.models import InstitutosCarreras, Inscripciones, EstudiantesPrimerCarrera, EstudiantesSegundaCarrera
+from app.inscripciones.models import InstitutosCarreras, EstudiantesPrimerCarrera, EstudiantesSegundaCarrera, EstudiantesInscripcionesCompletas
 
 
 class InstitutosCarrerasAdmin(admin.ModelAdmin):
     icon_name = 'settings_applications'
     list_display = ('id',)
     ordering = ('id',)
-
-
-class InscripcionesResources(resources.ModelResource):
-    class Meta:
-        model = Inscripciones
-
-
-class InscripcionesAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    icon_name = 'how_to_reg'
-    search_fields = ['fecha_inscripcion']
-    list_display = (
-        'id',
-        'fecha_inscripcion')
-    ordering = ('id',)
-    resource_class = InscripcionesResources
 
 
 class EstudiantesPrimerCarreraResources(resources.ModelResource):
@@ -55,10 +40,23 @@ class EstudiantesSegundaCarreraAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = EstudiantesSegundaCarreraResources
 
 
+class EstudiantesInscripcionesCompletasResources(resources.ModelResource):
+    class Meta:
+        model = EstudiantesInscripcionesCompletas
+
+
+class EstudiantesInscripcionesCompletasAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    icon_name = "how_to_reg"
+    list_display = ('id',)
+    ordering = ('id',)
+    resource_class = EstudiantesInscripcionesCompletasResources
+
+
 '''Registro de los modelos de Carreras'''
 admin.site.register(InstitutosCarreras, InstitutosCarrerasAdmin)
-admin.site.register(Inscripciones, InscripcionesAdmin)
 admin.site.register(EstudiantesPrimerCarrera,
                     EstudiantesPrimerCarreraAdmin)
 admin.site.register(EstudiantesSegundaCarrera,
                     EstudiantesSegundaCarreraAdmin)
+admin.site.register(EstudiantesInscripcionesCompletas,
+                    EstudiantesInscripcionesCompletasAdmin)

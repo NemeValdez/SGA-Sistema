@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from app.institutos.serializers import InstitutosSerializers, SedesInstitutosSerializers, RolesJerarquicosSerializers, JerarquicosSerializers
+from app.institutos.serializers import InstitutosSerializers, SedesInstitutosSerializers, RolesJerarquicosSerializers, JerarquicosSerializers, JerarquicosInstitutosSerializers
 
 
 class InstitutosViewSet(viewsets.ModelViewSet):
@@ -28,4 +28,11 @@ class JerarquicosViewSet(viewsets.ModelViewSet):
     '''Vista que hace un listado general y filtrado de los usuarios que poseen acceso como jerárquicos al sistema'''
     serializer_class = JerarquicosSerializers
     queryset = JerarquicosSerializers.Meta.model.objects.all()
+    permission_classes = (IsAuthenticated,)
+
+
+class JerarquicosInstitutosViewSet(viewsets.ModelViewSet):
+    '''Vista que relaciona al jerarquico con el instituto'''
+    serializer_class = JerarquicosInstitutosSerializers
+    queryset = JerarquicosInstitutosSerializers.Meta.model.objects.all()
     permission_classes = (IsAuthenticated,)

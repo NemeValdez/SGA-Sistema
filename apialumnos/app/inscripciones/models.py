@@ -31,35 +31,14 @@ class InstitutosCarreras(models.Model):
         return '%s dictada en el Instituto N° %s' % (self.nombre_carrera, self.numero_instituto)
 
 
-class Inscripciones(models.Model):
-    '''Modelo que otorga detalle del momento de la inscripción'''
-    fecha_inscripcion = models.DateTimeField(
-        null=False, blank=False, verbose_name='Fecha y hora de la preinscripción')
-
-    @property
-    def _history_user(self):
-        return self.changed_by
-
-    @_history_user.setter
-    def _history_user(self, value):
-        self.changed_by = value
-
-    class Meta:
-        verbose_name = "Dato de Inscripción"
-        verbose_name_plural = "Datos de Inscripciones"
-
-    def __str__(self):
-        return 'Inscripción N° %s realizada el %s' % (str(self.id), str(self.fecha_inscripcion))
-
-
 class EstudiantesPrimerCarrera(models.Model):
     '''Inscripción del estudiante a su primer carrera'''
     relacion_estudiante = models.ForeignKey(
         Estudiantes, on_delete=models.CASCADE, related_name='estudiantesPreinscripcionUno')
     primer_carrera = models.OneToOneField(
         Carreras, on_delete=models.CASCADE, related_name='carrerasPreinscripcionUno')
-    relacion_inscripcion = models.ForeignKey(
-        Inscripciones, on_delete=models.CASCADE, related_name='inscripcionPreinscripcionUno')
+    fecha_inscripcion = models.DateTimeField(
+        null=False, blank=False, verbose_name='Fecha y hora de la preinscripción a la Primer carrera')
 
     @property
     def _history_user(self):
@@ -83,8 +62,8 @@ class EstudiantesSegundaCarrera(models.Model):
         Estudiantes, on_delete=models.CASCADE, related_name='estudiantesPreinscripcionDos')
     segunda_carrera = models.OneToOneField(
         Carreras, on_delete=models.CASCADE, related_name='carrerasPreinscripcionDos')
-    relacion_inscripcion = models.ForeignKey(
-        Inscripciones, on_delete=models.CASCADE, related_name='inscripcionPreinscripcionDos')
+    fecha_inscripcion = models.DateTimeField(
+        null=False, blank=False, verbose_name='Fecha y hora de la preinscripción a la Segunda carrera')
 
     @property
     def _history_user(self):

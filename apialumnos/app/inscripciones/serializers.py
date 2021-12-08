@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app.inscripciones.models import InstitutosCarreras, Inscripciones, EstudiantesPrimerCarrera, EstudiantesSegundaCarrera, EstudiantesInscripcionesCompletas
+from app.inscripciones.models import InstitutosCarreras, EstudiantesPrimerCarrera, EstudiantesSegundaCarrera, EstudiantesInscripcionesCompletas
 
 
 class InstitutosCarrerasSerializer(serializers.ModelSerializer):
@@ -19,12 +19,6 @@ class InstitutosCarrerasSerializer(serializers.ModelSerializer):
         }
 
 
-class InscripcionesSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Inscripciones
-        fields = '__all__'
-
-
 class EstudiantesPrimerCarreraSerializer(serializers.ModelSerializer):
     class Meta:
         model = EstudiantesPrimerCarrera
@@ -37,8 +31,7 @@ class EstudiantesPrimerCarreraSerializer(serializers.ModelSerializer):
             'dni_estudiante': instance.relacion_estudiante.dni_estudiante if instance.relacion_estudiante.dni_estudiante is not None else '',
             'id_carrera': instance.relacion_carrera.id if instance.relacion_carrera.id is not None else '',
             'carrera': instance.relacion_carrera.nombre_carrera if instance.relacion_carrera.nombre_carrera is not None else '',
-            'id_inscripcion': instance.relacion_inscripcion.id if instance.relacion_inscripcion.id is not None else '',
-            'fecha_inscripcion': instance.relacion_inscripcion.fecha_inscripcion if instance.relacion_inscripcion.fecha_inscripcion is not None else ''
+            'fecha_inscripcion': instance.fecha_inscripcion
         }
 
 
@@ -54,8 +47,7 @@ class EstudiantesSegundaCarreraSerializer(serializers.ModelSerializer):
             'dni_estudiante': instance.relacion_estudiante.dni_estudiante if instance.relacion_estudiante.dni_estudiante is not None else '',
             'id_carrera': instance.relacion_carrera.id if instance.relacion_carrera.id is not None else '',
             'carrera': instance.relacion_carrera.nombre_carrera if instance.relacion_carrera.nombre_carrera is not None else '',
-            'id_inscripcion': instance.relacion_inscripcion.id if instance.relacion_inscripcion.id is not None else '',
-            'fecha_inscripcion': instance.relacion_inscripcion.fecha_inscripcion if instance.relacion_inscripcion.fecha_inscripcion is not None else ''
+            'fecha_inscripcion': instance.fecha_inscripcion
         }
 
 

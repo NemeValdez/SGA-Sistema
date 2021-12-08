@@ -1,15 +1,17 @@
 from rest_framework.routers import DefaultRouter
-from app.institutos.views import InstitutosViewSet, SedesInstitutosViewSet, RolesJerarquicosViewSet, JerarquicosViewSet
+from app.institutos.views import InstitutosViewSet, SedesInstitutosViewSet, RolesJerarquicosViewSet, JerarquicosViewSet, JerarquicosInstitutosViewSet
 
 
 routers = DefaultRouter()
 routers.register(r'instituto', InstitutosViewSet,
-                 basename='Datos del Instituto')
+                 basename='institutos')
 routers.register(r'sede', SedesInstitutosViewSet,
-                 basename='Datos de la Sede del Instituto')
+                 basename='sedesInstitutos')
 routers.register(r'cargo', RolesJerarquicosViewSet,
-                 basename='Roles dentro de los Institutos')
+                 basename='cargosInstitutos')
 routers.register(r'jerarquico', JerarquicosViewSet,
-                 basename='Personas con acceso al sistema')
+                 basename='personasAcceso')
+routers.register(r'jerarquico-instituto',
+                 JerarquicosInstitutosViewSet, basename='jerarquicoInstituto')
 
 urlpatterns = routers.urls

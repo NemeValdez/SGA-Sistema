@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from app.inscripciones.filters import InscripcionFilter
-from app.inscripciones.models import InstitutosCarreras, Inscripciones, EstudiantesPrimerCarrera, EstudiantesSegundaCarrera
-from app.inscripciones.serializers import InstitutosCarrerasSerializer, InscripcionesSerializer, EstudiantesPrimerCarreraSerializer, EstudiantesSegundaCarreraSerializer, EstudianteInscripcionesCompletasSerializer
+from app.inscripciones.models import InstitutosCarreras, EstudiantesPrimerCarrera, EstudiantesSegundaCarrera, EstudiantesInscripcionesCompletas
+from app.inscripciones.serializers import InstitutosCarrerasSerializer, EstudiantesPrimerCarreraSerializer, EstudiantesSegundaCarreraSerializer, EstudianteInscripcionesCompletasSerializer
 
 
 class InstitutosCarrerasViewSet(viewsets.ModelViewSet):
@@ -10,12 +10,6 @@ class InstitutosCarrerasViewSet(viewsets.ModelViewSet):
     serializer_class = InstitutosCarrerasSerializer
     permission_classes = (IsAuthenticated,)
     queryset = InstitutosCarrerasSerializer.Meta.model.objects.all()
-
-
-class InscripcionesViewSet(viewsets.ModelViewSet):
-    '''Vista que gestiona el CRUD de los datos de la preinscripción'''
-    serializer_class = InscripcionesSerializer
-    queryset = InscripcionesSerializer.Meta.model.objects.all()
 
 
 class EstudiantesPrimerCarreraViewSet(viewsets.ModelViewSet):
