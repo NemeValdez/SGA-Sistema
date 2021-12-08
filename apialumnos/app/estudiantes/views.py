@@ -1,5 +1,4 @@
-from rest_framework import viewsets
-from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import viewsets, generics
 from app.estudiantes.models import Estudiantes
 from app.estudiantes.serializers import EstudiantesSerializers, EstudiantesEstablecimientosSerializers
 
