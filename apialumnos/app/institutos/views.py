@@ -17,14 +17,14 @@ class SedesInstitutosViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
 
 
-class RolesJerarquicosViewSet(viewsets.ReadOnlyModelViewSet):
+class RolesJerarquicosViewSet(viewsets.ModelViewSet):
     '''Vista que hace un listado general y filtrado de los cargos que poseen las personas en el Instituto'''
     serializer_class = RolesJerarquicosSerializers
     queryset = RolesJerarquicosSerializers.Meta.model.objects.all()
     permission_classes = (IsAuthenticated,)
 
 
-class JerarquicosViewSet(viewsets.ReadOnlyModelViewSet):
+class JerarquicosViewSet(viewsets.ModelViewSet):
     '''Vista que hace un listado general y filtrado de los usuarios que poseen acceso como jerárquicos al sistema'''
     serializer_class = JerarquicosSerializers
     queryset = JerarquicosSerializers.Meta.model.objects.all()
