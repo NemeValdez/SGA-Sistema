@@ -18,4 +18,5 @@ class BuscarDNIView(viewsets.ReadOnlyModelViewSet):
     '''Vista que permite buscar por DNI a los registrados como estudiantes'''
     serializer_class = EstudiantesSerializers
     queryset = EstudiantesSerializers.Meta.model.objects.all()
+    filter_backends = [filters.SearchFilter]
     search_fields = ['dni_estudiante']
