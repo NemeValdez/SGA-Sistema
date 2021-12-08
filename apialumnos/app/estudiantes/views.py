@@ -21,4 +21,4 @@ class BuscarDNIView(generics.ListAPIView):
     queryset = Estudiantes.objects.all()
     serializer_class = EstudiantesSerializers
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['dni_estudiante', ]
+    filterset_fields = ['dni_estudiante']
