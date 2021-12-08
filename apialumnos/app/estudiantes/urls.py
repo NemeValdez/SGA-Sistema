@@ -6,5 +6,5 @@ routers.register(r'escuela', EstudiantesEstablecimientosViewSet,
                  basename='Secundario de donde proviene el estudiante')
 routers.register(r'estudiante', EstudiantesViewSet,
                  basename='Datos del estudiante')
-routers.register(r'buscar-dni', BuscarDNIView)
+routers.register(r'buscar-dni', BuscarDNIView.as_view(), name='dni')
 urlpatterns = routers.urls
