@@ -19,5 +19,5 @@ class BuscarDNIView(generics.ListAPIView):
     '''Vista que permite buscar por DNI a los registrados como estudiantes'''
     queryset = EstudiantesSerializers.Meta.model.objects.all()
     serializer_class = EstudiantesSerializers
-    filter_backends = (DjangoFilterBackend)
-    filterset_fields = ('dni_estudiante')
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_fields = ('dni_estudiante',)
