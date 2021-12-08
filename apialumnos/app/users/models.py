@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 class UsuarioManager(BaseUserManager):
     '''Control de la gestión de usuarios personalizado'''
 
-    def create_user(self, dni_usuario, password):
+    def create_user(self, dni_usuario, password=None):
         '''Creación de usuario básico'''
         if not dni_usuario:
             raise ValueError('El usuario debe tener un DNI')
@@ -14,7 +14,7 @@ class UsuarioManager(BaseUserManager):
         usuario.save(using=self._db)
         return usuario
 
-    def create_superuser(self, dni_usuario, password):
+    def create_superuser(self, dni_usuario, password=None):
         '''Creación de usuario completo'''
         usuario = self.create_user(dni_usuario, password)
         usuario.is_superuser = True
