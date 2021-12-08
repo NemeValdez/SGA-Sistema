@@ -11,7 +11,7 @@ class UsuarioManager(BaseUserManager):
             raise ValueError('El usuario debe tener un DNI')
         usuario = self.model(dni_usuario=dni_usuario)
         usuario.set_password(password)
-        usuario.save(using=self._db)
+        usuario.save(using=self.db)
         return usuario
 
     def create_superuser(self, dni_usuario, password=None):
@@ -19,7 +19,7 @@ class UsuarioManager(BaseUserManager):
         usuario = self.create_user(dni_usuario, password)
         usuario.is_superuser = True
         usuario.is_staff = True
-        usuario.save(using=self._db)
+        usuario.save(using=self.db)
         return usuario
 
 
