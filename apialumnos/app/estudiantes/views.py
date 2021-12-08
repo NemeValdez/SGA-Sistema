@@ -16,8 +16,8 @@ class EstudiantesViewSet(viewsets.ModelViewSet):
     queryset = EstudiantesSerializers.Meta.model.objects.all()
 
 
-class DNIViewset(viewsets.ModelViewSet):
-    serializer_class = EstudiantesSerializers
+class BuscarDNI(generics.ListAPIView):
     queryset = EstudiantesSerializers.Meta.model.objects.all()
-    filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('dni_estudiante')
+    serializer_class = EstudiantesSerializers
+    name = 'buscar-dni'
+    filter_fields = ('dni_estudiante',)
