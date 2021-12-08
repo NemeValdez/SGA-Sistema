@@ -1,12 +1,6 @@
 from rest_framework import viewsets
 from app.estudiantes.filters import DNIFilter
-from app.estudiantes.serializers import EstudiantesSerializers, EstudiantesEstablecimientosSerializers
-
-
-class EstudiantesEstablecimientosViewSet(viewsets.ModelViewSet):
-    '''Vista de CRUD de secundario del Estudiante al pre inscribirse'''
-    serializer_class = EstudiantesEstablecimientosSerializers
-    queryset = EstudiantesEstablecimientosSerializers.Meta.model.objects.all()
+from app.estudiantes.serializers import EstudiantesSerializers
 
 
 class EstudiantesViewSet(viewsets.ModelViewSet):

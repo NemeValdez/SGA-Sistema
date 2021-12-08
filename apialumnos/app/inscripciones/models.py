@@ -100,3 +100,26 @@ class EstudiantesSegundaCarrera(models.Model):
 
     def __str__(self):
         return 'Inscripción N° %s del Estudiante %s' % (str(self.relacion_inscripcion.id), str(self.relacion_estudiante.dni_estudiante))
+
+
+class EstudiantesInscripcionesCompletas(models.Model):
+    '''Tabla que relaciona ambas inscripciones a las dos carreras'''
+    relacion_primer_carrera = models.ForeignKey(
+        EstudiantesPrimerCarrera, on_delete=models.CASCADE, related_name='relacionCarreraUno', null=True, blank=True)
+    relacion_segunda_carrera = models.ForeignKey(
+        EstudiantesSegundaCarrera, on_delete=models.CASCADE, related_name='relacionCarreraDos', null=True, blank=True)
+
+    @property
+    def _history_user(self):
+        return self.changed_by
+
+    @_history_user.setter
+    def _history_user(self, value):
+        self.changed_by = value
+
+    class Meta:
+        verbose_name = "Inscripción general"
+        verbose_name_plural = "Inscripciones formalizadas"
+
+    def __str__(self):
+        return 'Carrera N|1: %s - Carrera N|2: %s' % (str(self.relacion_primer_carrera.id), str(self.relacion_segunda_carrera.id))

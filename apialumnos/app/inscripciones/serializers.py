@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app.inscripciones.models import InstitutosCarreras, Inscripciones, EstudiantesPrimerCarrera, EstudiantesSegundaCarrera
+from app.inscripciones.models import InstitutosCarreras, Inscripciones, EstudiantesPrimerCarrera, EstudiantesSegundaCarrera, EstudiantesInscripcionesCompletas
 
 
 class InstitutosCarrerasSerializer(serializers.ModelSerializer):
@@ -56,4 +56,17 @@ class EstudiantesSegundaCarreraSerializer(serializers.ModelSerializer):
             'carrera': instance.relacion_carrera.nombre_carrera if instance.relacion_carrera.nombre_carrera is not None else '',
             'id_inscripcion': instance.relacion_inscripcion.id if instance.relacion_inscripcion.id is not None else '',
             'fecha_inscripcion': instance.relacion_inscripcion.fecha_inscripcion if instance.relacion_inscripcion.fecha_inscripcion is not None else ''
+        }
+
+
+class EstudianteInscripcionesCompletasSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EstudiantesInscripcionesCompletas
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        return{
+            'id': instance.id,
+            'id_relacion_primer_carrera': instance.relacion_primer_carrera.id if instance.relacion_primer_carrera.id is not None else '',
+            'id_relacion_segunda_carrera': instance.relacion_segunda_carrera.id if instance.relacion_segunda_carrera.id is not None else '',
         }

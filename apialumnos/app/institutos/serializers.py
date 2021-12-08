@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app.institutos.models import Institutos, SedesInstitutos, RolesJerarquicos, Jerarquicos
+from app.institutos.models import Institutos, SedesInstitutos, RolesJerarquicos, Jerarquicos, InstitutosJerarquicos
 
 
 class InstitutosSerializers(serializers.ModelSerializer):
@@ -48,8 +48,8 @@ class JerarquicosSerializers(serializers.ModelSerializer):
             'apellido_jerarquico': instance.apellido_jerarquico,
             'sexo_jerarquico': instance.sexo_jerarquico,
             'fecha_nacimiento_jerarquico': instance.fecha_nacimiento_jerarquico,
-            'id_cargo': instance.relacion_instituto_jerarquico.id if instance.relacion_instituto_jerarquico.id is not None else '',
+            'id_cargo': instance.relacion_rol_jerarquico.id if instance.relacion_rol_jerarquico.id is not None else '',
             'cargo': instance.relacion_rol_jerarquico.nombre_rol if instance.relacion_rol_jerarquico.nombre_rol is not None else '',
-            'id_instituto': instance.relacion_instituto_jerarquico.id if instance.relacion_instituto_jerarquico.id is not None else '',
-            'instituto': instance.relacion_instituto_jerarquico.numero_instituto if instance.relacion_instituto_jerarquico.numero_instituto is not None else'',
+            'id_instituto': instance.relacion_instituto.id if instance.relacion_instituto.id is not None else '',
+            'instituto': instance.relacion_instituto.numero_instituto if instance.relacion_instituto.numero_instituto is not None else'',
         }

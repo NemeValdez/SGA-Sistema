@@ -1,17 +1,7 @@
 from django.contrib import admin
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
-from app.estudiantes.models import Estudiantes, EstudiantesEstablecimientos
-
-
-class EstudiantesEstablecimientosAdmin(admin.ModelAdmin):
-    icon_name = 'location_city'
-    list_display = (
-        'id',
-        'titulo',
-        'estado_secundario',
-    )
-    ordering = ('id',)
+from app.estudiantes.models import Estudiantes
 
 
 class EstudiantesResources(resources.ModelResource):
@@ -34,5 +24,3 @@ class EstudiantesAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
 '''Registro de los modelos de Estudiantes'''
 admin.site.register(Estudiantes, EstudiantesAdmin)
-admin.site.register(EstudiantesEstablecimientos,
-                    EstudiantesEstablecimientosAdmin)

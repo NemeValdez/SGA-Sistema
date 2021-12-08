@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app.estudiantes.models import Estudiantes, EstudiantesEstablecimientos
+from app.estudiantes.models import Estudiantes
 
 
 class EstudiantesSerializers(serializers.ModelSerializer):
@@ -18,14 +18,7 @@ class EstudiantesSerializers(serializers.ModelSerializer):
             'telefono_estudiante': instance.telefono_estudiante,
             'mail_estudiante': instance.mail_estudiante,
             'legajo_estudiante': instance.legajo_estudiante,
-            'id_escuela': instance.secundario_estudiante.id if instance.secundario_estudiante.id is not None else '',
-            'nombre_escuela': instance.secundario_estudiante.nombre_escuela if instance.secundario_estudiante.nombre_escuela is not None else '',
-            'titulo': instance.secundario_estudiante.titulo if instance.secundario_estudiante.titulo is not None else '',
-            'estado_secundario': instance.secundario_estudiante.estado_secundario if instance.secundario_estudiante.estado_secundario is not None else '',
+            'nombre_escuela': instance.nombre_escuela,
+            'titulo_escuela': instance.titulo_escuela,
+            'estado_secundario': instance.estado_secundario,
         }
-
-
-class EstudiantesEstablecimientosSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = EstudiantesEstablecimientos
-        fields = '__all__'

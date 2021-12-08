@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
-from app.inscripciones.filters import Inscripcion1Filter, Inscripcion2Filter
+from app.inscripciones.filters import InscripcionFilter
 from app.inscripciones.models import InstitutosCarreras, Inscripciones, EstudiantesPrimerCarrera, EstudiantesSegundaCarrera
-from app.inscripciones.serializers import InstitutosCarrerasSerializer, InscripcionesSerializer, EstudiantesPrimerCarreraSerializer, EstudiantesSegundaCarreraSerializer
+from app.inscripciones.serializers import InstitutosCarrerasSerializer, InscripcionesSerializer, EstudiantesPrimerCarreraSerializer, EstudiantesSegundaCarreraSerializer, EstudianteInscripcionesCompletasSerializer
 
 
 class InstitutosCarrerasViewSet(viewsets.ModelViewSet):
@@ -30,15 +30,8 @@ class EstudianteSegundaCarreraViewSet(viewsets.ModelViewSet):
     queryset = EstudiantesSegundaCarreraSerializer.Meta.model.objects.all()
 
 
-class BuscarInscripcion1View(viewsets.ReadOnlyModelViewSet):
-    queryset = EstudiantesPrimerCarreraSerializer.Meta.model.objects.all()
-    serializer_class = EstudiantesPrimerCarreraSerializer
-    filter_class = Inscripcion1Filter
-    search_fields = ('=relacion_estudiante',)
-
-
-class BuscarInscripcion2View(viewsets.ReadOnlyModelViewSet):
-    queryset = EstudiantesPrimerCarreraSerializer.Meta.model.objects.all()
-    serializer_class = EstudiantesPrimerCarreraSerializer
-    filter_class = Inscripcion2Filter
-    search_fields = ('=relacion_estudiante',)
+class BuscarInscripcionView(viewsets.ReadOnlyModelViewSet):
+    queryset = EstudianteInscripcionesCompletasSerializer.Meta.model.objects.all()
+    serializer_class = EstudianteInscripcionesCompletasSerializer
+    filter_class = InscripcionFilter
+    search_fields = ('=id',)

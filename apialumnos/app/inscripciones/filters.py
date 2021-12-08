@@ -1,14 +1,8 @@
 import django_filters
-from app.inscripciones.models import EstudiantesPrimerCarrera, EstudiantesSegundaCarrera
+from app.inscripciones.models import EstudiantesInscripcionesCompletas
 
 
-class Inscripcion1Filter(django_filters.FilterSet):
+class InscripcionFilter(django_filters.FilterSet):
     class Meta():
-        model = EstudiantesPrimerCarrera
-        fields = ['relacion_estudiante']
-
-
-class Inscripcion2Filter(django_filters.FilterSet):
-    class Meta():
-        model = EstudiantesSegundaCarrera
-        fields = ['relacion_estudiante']
+        model = EstudiantesInscripcionesCompletas
+        fields = ['id']

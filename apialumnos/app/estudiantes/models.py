@@ -1,32 +1,6 @@
 from django.db import models
 
 
-class EstudiantesEstablecimientos(models.Model):
-    '''Modelo de relación con la escuela de procedencia del estudiante'''
-    nombre_escuela = models.CharField(
-        max_length=100, null=False, blank=False, verbose_name='Nombre del secundario del preinscripto')
-    titulo = models.CharField(
-        max_length=100, null=False, blank=False, verbose_name='Título que otorga el secundario')
-    estado_secundario = models.CharField(
-        max_length=1, null=False, blank=False, verbose_name='Estado de la finalización del secundario')
-    '''Los campos originales del formulario A1 - preinscripción se van a cargar como nuevos cuando se decida cargar'''
-
-    @property
-    def _history_user(self):
-        return self.changed_by
-
-    @_history_user.setter
-    def _history_user(self, value):
-        self.changed_by = value
-
-    class Meta:
-        verbose_name = "Secundario del Estudiante"
-        verbose_name_plural = "Secundario del Estudiante"
-
-    def __str__(self):
-        return self.nombre_escuela
-
-
 class Estudiantes(models.Model):
     '''Datos completos del estudiante'''
     apellido_estudiante = models.CharField(
@@ -45,8 +19,13 @@ class Estudiantes(models.Model):
         null=False, blank=False, verbose_name='Mail del estudiante')
     legajo_estudiante = models.CharField(
         max_length=12, null=False, blank=False, verbose_name='Número de legajo del estudiante')
-    secundario_estudiante = models.ForeignKey(
-        EstudiantesEstablecimientos, on_delete=models.CASCADE, related_name="secundariasEstudiantes")
+    nombre_escuela = models.CharField(
+        max_length=100, null=False, blank=False, verbose_name='Nombre del secundario del preinscripto')
+    titulo_escuela = models.CharField(
+        max_length=100, null=False, blank=False, verbose_name='Título que otorga el secundario')
+    estado_secundario = models.CharField(
+        max_length=1, null=False, blank=False, verbose_name='Estado de la finalización del secundario')
+    '''Los campos originales del formulario A1 - preinscripción se van a cargar como nuevos cuando se decida cargar'''
 
     @property
     def _history_user(self):
