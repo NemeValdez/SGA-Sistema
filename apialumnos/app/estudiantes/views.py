@@ -1,5 +1,5 @@
-from rest_framework import viewsets, filters
-from app.estudiantes.models import Estudiantes
+from rest_framework import viewsets
+from app.estudiantes.filters import DNIFilter
 from app.estudiantes.serializers import EstudiantesSerializers, EstudiantesEstablecimientosSerializers
 
 
@@ -18,5 +18,5 @@ class EstudiantesViewSet(viewsets.ModelViewSet):
 class BuscarDNIView(viewsets.ReadOnlyModelViewSet):
     queryset = EstudiantesSerializers.Meta.model.objects.all()
     serializer_class = EstudiantesSerializers
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['dni_estudiante']
+    filter_class = DNIFilter
+    search_fields = ('=dni_estudiante',)
